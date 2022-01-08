@@ -1,9 +1,9 @@
 {
-  "name": "electron",
+  "name": "icons-manager",
   "version": "1.0.0",
-  "description": "A Browser made from a programmer and design for others.",
+  "description": "Gerenciador de ícones, feito por Solrachix",
   "keywords": [
-    "electron"
+    "icons-manager"
   ],
   "license": "MIT",
   "author": "Carlos Miguel <carlos.miguel.oliveira.17@gmail.com>",
@@ -18,8 +18,7 @@
     "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
     "postinstall": "electron-builder install-app-deps",
     "lint": "eslint --ext .tsx,.ts,.js src/ electron/",
-    "package": "yarn build && electron-builder build --publish never",
-    "test": "jest"
+    "package": "yarn build && electron-builder build --publish never"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -111,12 +110,13 @@
     "webpack-dev-server": "^3.10.3"
   },
   "build": {
-    "appId": "com.solrachix.electron",
-    "productName": "electron",
+    "appId": "com.icons-manager.solrachix",
+    "productName": "Icons Manager - solrachix",
     "files": [
       "dist/",
       "build/"
     ],
+    "icon": "",
     "mac": {
       "category": "public.app-category.utilities"
     },
@@ -125,6 +125,16 @@
         "AppImage"
       ],
       "category": "Network"
+    },
+    "win": {
+      "asar": false,
+      "target": "nsis",
+      "icon": "dist/renderer/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "dist/renderer/icon.ico",
+      "installerHeaderIcon": "dist/renderer/icon.ico",
+      "deleteAppDataOnUninstall": true
     },
     "directories": {
       "buildResources": "build",

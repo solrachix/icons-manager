@@ -16,13 +16,14 @@ import { getSystemColorPalette } from './getSystemColorPalette'
 
 let mainWindow: Electron.BrowserWindow // | null
 let webContents: Electron.WebContents
-console.log(process.platform)
 
 getSystemColorPalette()
 
 function createWindow () {
-  const partition = 'persist:ellipsus'
-  const icon = nativeImage.createFromPath(`${app.getAppPath()}/build/icon.png`)
+  const partition = 'persist:solrachix'
+  const icon = nativeImage.createFromPath(
+    `${app.getAppPath()}/dist/renderer/icon.png`
+  )
 
   if (app.dock) {
     app.dock.setIcon(icon)
@@ -45,7 +46,7 @@ function createWindow () {
 
   mainWindow = Window({
     id: 0,
-    title: 'Thoth',
+    title: 'Icons Manager',
     icon,
     themeSource: 'dark',
     show: false,
@@ -58,6 +59,7 @@ function createWindow () {
   mainWindow.once('ready-to-show', () => {
     splashScreen.destroy()
     mainWindow.show()
+    mainWindow.focus()
 
     installExtension(REACT_DEVELOPER_TOOLS)
       .then((name) => console.log(`Added Extension:  ${name}`))
