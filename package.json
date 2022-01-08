@@ -1,0 +1,134 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "A Browser made from a programmer and design for others.",
+  "keywords": [
+    "electron"
+  ],
+  "license": "MIT",
+  "author": "Carlos Miguel <carlos.miguel.oliveira.17@gmail.com>",
+  "main": "./dist/app.js",
+  "scripts": {
+    "build": "rimraf dist && npm-run-all -p build:*",
+    "build:electron": "cross-env NODE_ENV=production webpack --config webpack/electron.webpack.js",
+    "build:react": "cross-env NODE_ENV=production webpack --config webpack/react.webpack.js",
+    "dev": "npm-run-all -p dev:react electron:serve",
+    "dev:electron": "cross-env NODE_ENV=development webpack --config webpack/electron.webpack.js --mode development && electron . --enable-transparent-visuals --disable-gpu",
+    "dev:react": "cross-env NODE_ENV=development webpack-dev-server --config webpack/react.webpack.js --mode development",
+    "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
+    "postinstall": "electron-builder install-app-deps",
+    "lint": "eslint --ext .tsx,.ts,.js src/ electron/",
+    "package": "yarn build && electron-builder build --publish never",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@types/react-select": "^3.0.22",
+    "@types/uuid": "^8.3.0",
+    "@unform/core": "^2.1.3",
+    "@unform/web": "^2.1.3",
+    "based-blob": "^1.0.1",
+    "copy-webpack-plugin": "^6.1.1",
+    "css-loader": "^4.0.0",
+    "electron-context-menu": "^2.3.0",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-store": "^5.2.0",
+    "file-loader": "^6.0.0",
+    "file-sizeof": "^1.0.4",
+    "node-gyp": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "polished": "^3.6.5",
+    "re-resizable": "^6.5.4",
+    "react": "^16.13.1",
+    "react-contexify": "^5.0.0",
+    "react-dom": "^16.13.1",
+    "react-dropzone": "^11.2.1",
+    "react-icons": "^3.10.0",
+    "react-modal": "^3.11.2",
+    "react-router-dom": "^5.2.0",
+    "react-select": "^3.1.0",
+    "react-spring": "^8.0.27",
+    "react-svg-loader": "^3.0.3",
+    "react-use": "^15.3.2",
+    "reactjs-popup": "^2.0.4",
+    "style-loader": "^1.2.1",
+    "styled-components": "^5.1.1",
+    "url-loader": "^4.1.0",
+    "uuid": "^8.3.1",
+    "wait-on": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.1",
+    "@testing-library/react": "^10.4.3",
+    "@types/electron-devtools-installer": "^2.2.0",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-modal": "^3.10.6",
+    "@types/react-resizable": "^1.7.2",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
+    "@webpack-cli/serve": "^1.6.0",
+    "babel-loader": "^8.1.0",
+    "btoa": "^1.2.1",
+    "cross-env": "^7.0.2",
+    "electron": "^8.2.2",
+    "electron-builder": "^22.8.0",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.2.0",
+    "json-schema-typed": "^7.0.3",
+    "prettier": "^2.0.5",
+    "react-app-polyfill": "^1.0.6",
+    "react-refresh": "^0.8.3",
+    "rimraf": "^3.0.2",
+    "sort-package-json": "^1.44.0",
+    "typescript": "^4.5.4",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "build": {
+    "appId": "com.solrachix.electron",
+    "productName": "electron",
+    "files": [
+      "dist/",
+      "build/"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Network"
+    },
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    }
+  }
+}
