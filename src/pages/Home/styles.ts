@@ -12,12 +12,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Container = styled.div`
   header {
+    position: relative;
     width: 100%;
     height: 4rem;
     padding: 1rem;
 
     background: ${(props) => props.theme.colors.background.normal};
     border-bottom: 1px solid ${(props) => props.theme.colors.background.darker};
+
+    display: flex;
 
     input {
       width: 100%;

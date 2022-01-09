@@ -4,6 +4,7 @@ import * as Icons from 'react-icons'
 
 import { useTheme } from 'styled-components'
 import ContextMenu, { RefMenu } from '../../components/ContextMenu'
+import PickerColor from '../../components/PickerColor'
 
 import { Container } from './styles'
 
@@ -11,13 +12,14 @@ function Home (): React.ReactElement {
   const theme = useTheme().colors
   const menuRef = useRef<RefMenu>()
 
-  const [iconsLib, setIconsLib] = useState<IconLib[]>(
+  const [iconsLib, setIconsLib] = useState<IconLib[]>( // @ts-ignore
     Icons.IconsManifest.sort((a: IconLib, b: IconLib) =>
       a.name.localeCompare(b.name)
     )
   )
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(0)
+  const [color, setColor] = useState(theme.text.normal)
 
   useEffect(() => {
     ;(async () => {
@@ -61,6 +63,10 @@ function Home (): React.ReactElement {
       menu.handleItemClick({ svg: e.currentTarget })
     }
   }
+
+  function handleChangeColor (color: any) {
+    setColor(color.hex)
+  }
   return (
     <Container>
       <header>
@@ -70,6 +76,8 @@ function Home (): React.ReactElement {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+
+        <PickerColor color={color} onChange={handleChangeColor} />
       </header>
 
       <main>
@@ -90,7 +98,7 @@ function Home (): React.ReactElement {
           <Icons.IconContext.Provider
             value={{
               size: '4rem',
-              color: theme.text.normal,
+              color: color,
               className: 'react-icons'
             }}
           >
@@ -105,7 +113,9 @@ function Home (): React.ReactElement {
                   return (
                     <Icon
                       key={`${Icon.name}-${index}`}
-                      onContextMenu={(e) => handleContextMenu(e, Icon.name)}
+                      onContextMenu={(e: any) =>
+                        handleContextMenu(e, Icon.name)
+                      }
                       onClick={handleCopyOnClick}
                     />
                   )
