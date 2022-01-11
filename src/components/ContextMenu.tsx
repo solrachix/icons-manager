@@ -68,6 +68,7 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
     type: string
   ) {
     let text = ''
+
     if (type === 'name') {
       text = props?.iconType || ''
     } else if (type === 'element') {

@@ -1,6 +1,6 @@
 {
   "name": "icons-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gerenciador de ícones, feito por Solrachix",
   "keywords": [
     "icons-manager"
@@ -18,7 +18,8 @@
     "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
     "postinstall": "electron-builder install-app-deps",
     "lint": "eslint --ext .tsx,.ts,.js src/ electron/",
-    "package": "yarn build && electron-builder build --publish never"
+    "package": "yarn build && electron-builder build --publish never",
+    "release": "yarn build && electron-builder build --publish onTagOrDraft"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -40,6 +41,7 @@
     "electron-context-menu": "^2.3.0",
     "electron-devtools-installer": "^3.1.1",
     "electron-store": "^5.2.0",
+    "electron-updater": "4.3.9",
     "file-loader": "^6.0.0",
     "file-sizeof": "^1.0.4",
     "node-gyp": "^7.0.0",
@@ -87,7 +89,7 @@
     "btoa": "^1.2.1",
     "cross-env": "^7.0.2",
     "electron": "^8.2.2",
-    "electron-builder": "^22.8.0",
+    "electron-builder": "^22.10.5",
     "eslint": "^7.3.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-standard": "^14.1.1",
@@ -131,7 +133,11 @@
     "win": {
       "asar": false,
       "target": "nsis",
-      "icon": "dist/renderer/icon.ico"
+      "icon": "dist/renderer/icon.ico",
+      "publish": [
+        "github",
+        "bitbucket"
+      ]
     },
     "nsis": {
       "installerIcon": "dist/renderer/icon.ico",

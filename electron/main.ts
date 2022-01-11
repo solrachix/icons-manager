@@ -9,13 +9,46 @@ import contextMenu from 'electron-context-menu'
 import installExtension, {
   REACT_DEVELOPER_TOOLS
 } from 'electron-devtools-installer'
+
 import * as path from 'path'
 import * as url from 'url'
+
 import Window from '../src/utils/window'
 import { getSystemColorPalette } from './getSystemColorPalette'
 
+import { autoUpdater } from 'electron-updater'
+
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Procurando pr atualizações...')
+})
+autoUpdater.on('update-available', (info) => {
+  sendStatusToWindow('Atualização encontrada.')
+})
+autoUpdater.on('update-not-available', (info) => {
+  sendStatusToWindow('Nenhuma atualização encontrada.')
+})
+autoUpdater.on('error', (err) => {
+  sendStatusToWindow('Erro na hora de fazer a atualização. ' + err)
+})
+
+autoUpdater.on('download-progress', (progressObj) => {
+  let logMessage = 'Velocidade do download: ' + progressObj.bytesPerSecond
+  logMessage = logMessage + ' - Downloaded ' + progressObj.percent + '%'
+  logMessage =
+    logMessage + ' (' + progressObj.transferred + '/' + progressObj.total + ')'
+  sendStatusToWindow(logMessage)
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  sendStatusToWindow('Atualização baixada')
+})
+
 let mainWindow: Electron.BrowserWindow // | null
 let webContents: Electron.WebContents
+
+function sendStatusToWindow (text) {
+  // webContents.send('message', text)
+}
 
 getSystemColorPalette()
 
@@ -151,6 +184,8 @@ app.on('web-contents-created', (e, contents) => {
 })
 
 app.on('ready', () => {
+  autoUpdater.checkForUpdatesAndNotify()
+
   setTimeout(() => {
     createWindow()
     createShortcuts()

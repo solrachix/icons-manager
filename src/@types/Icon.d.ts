@@ -4,5 +4,7 @@ interface IconLib {
   licenseUrl: string
   name: string
   projectUrl: string
-  icons?: IconType[]
+  icons: {
+    [name: string]: IconType
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import * as Icons from 'react-icons'
+import { IconType } from 'react-icons/lib'
 
 import { useTheme } from 'styled-components'
 import ContextMenu, { RefMenu } from '../../components/ContextMenu'
@@ -20,10 +21,20 @@ function Home (): React.ReactElement {
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState(0)
   const [color, setColor] = useState(theme.text.normal)
+  const [icons, setIcons] = useState<string[]>([])
+
+  useEffect(() => {
+    setIcons(
+      Object.keys(iconsLib[selected].icons || {}).filter(
+        (iconName) =>
+          iconName.toLowerCase().indexOf(search.toLowerCase()) !== -1
+      )
+    )
+  }, [search, selected])
 
   useEffect(() => {
     ;(async () => {
-      const newIconsLib: IconLib[] = []
+      let newIconsLib: IconLib[] = []
       for await (const iconLib of iconsLib) {
         await import(`react-icons/${iconLib.id}/index.js`).then((icons) => {
           newIconsLib.push({
@@ -32,11 +43,12 @@ function Home (): React.ReactElement {
           })
         })
       }
-      setIconsLib(
-        newIconsLib.sort((a: IconLib, b: IconLib) =>
-          a.name.localeCompare(b.name)
-        )
+      newIconsLib = newIconsLib.sort((a: IconLib, b: IconLib) =>
+        a.name.localeCompare(b.name)
       )
+
+      setIcons(Object.keys(newIconsLib[selected].icons || {}))
+      setIconsLib(newIconsLib)
     })()
   }, [])
 
@@ -60,13 +72,14 @@ function Home (): React.ReactElement {
 
     if (menu) {
       // @ts-ignore
-      menu.handleItemClick({ svg: e.currentTarget })
+      menu.handleItemClick({ props: { svg: e.currentTarget } })
     }
   }
 
   function handleChangeColor (color: any) {
     setColor(color.hex)
   }
+
   return (
     <Container>
       <header>
@@ -102,28 +115,18 @@ function Home (): React.ReactElement {
               className: 'react-icons'
             }}
           >
-            {Object.values(iconsLib[selected]?.icons || {})?.map(
-              (Icon, index) => {
-                console.log(typeof Icon === 'function')
+            {icons?.map((IconName, index) => {
+              const Icon = iconsLib[selected]?.icons?.default[IconName]
+              if (!(typeof Icon === 'function')) return
 
-                if (
-                  typeof Icon === 'function' &&
-                  Icon.name.toLowerCase().includes(search.toLowerCase())
-                ) {
-                  return (
-                    <Icon
-                      key={`${Icon.name}-${index}`}
-                      onContextMenu={(e: any) =>
-                        handleContextMenu(e, Icon.name)
-                      }
-                      onClick={handleCopyOnClick}
-                    />
-                  )
-                }
-
-                return null
-              }
-            )}
+              return (
+                <Icon
+                  key={`${IconName}-${index}`}
+                  onContextMenu={(e: any) => handleContextMenu(e, IconName)}
+                  onClick={handleCopyOnClick}
+                />
+              )
+            })}
           </Icons.IconContext.Provider>
         </div>
       </main>
