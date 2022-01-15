@@ -94,6 +94,8 @@ export const Container = styled.div`
       overflow: auto;
 
       svg {
+        width: 4rem;
+        height: 4rem;
         margin: 1rem 2rem;
       }
     }

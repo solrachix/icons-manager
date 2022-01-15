@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import * as Icons from 'react-icons'
 import { IconType } from 'react-icons/lib'
+import IconlyGlass from '../../assets/IconlyGlass'
 
 import { useTheme } from 'styled-components'
 import ContextMenu, { RefMenu } from '../../components/ContextMenu'
@@ -35,6 +36,8 @@ function Home (): React.ReactElement {
   useEffect(() => {
     ;(async () => {
       let newIconsLib: IconLib[] = []
+      newIconsLib.push(await IconlyGlass())
+
       for await (const iconLib of iconsLib) {
         await import(`react-icons/${iconLib.id}/index.js`).then((icons) => {
           newIconsLib.push({
@@ -116,7 +119,13 @@ function Home (): React.ReactElement {
             }}
           >
             {icons?.map((IconName, index) => {
-              const Icon = iconsLib[selected]?.icons?.default[IconName]
+              let Icon
+
+              if (iconsLib[selected].isExternal) {
+                Icon = iconsLib[selected]?.icons[IconName]
+              } else {
+                Icon = iconsLib[selected]?.icons?.default[IconName]
+              }
               if (!(typeof Icon === 'function')) return
 
               return (

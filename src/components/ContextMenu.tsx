@@ -88,21 +88,29 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
   return (
     <Menu id={MENU_ID} theme="dark">
       <Item onClick={handleItemClick}>Copiar SVG</Item>
-      <Item onClick={(e) => handleItemCopyCode(e, 'name')}>
-        Copiar nome do ícone na &quot;react-icons&quot;
-      </Item>
-      <Item onClick={(e) => handleItemCopyCode(e, 'import')}>
-        Copiar importação &quot;react-icons&quot;
-      </Item>
-      <Item onClick={(e) => handleItemCopyCode(e, 'element')}>
-        Copiar elemento React
-      </Item>
-      <Separator />
+      {!iconLibSelected?.isExternal && (
+        <>
+          <Item onClick={(e) => handleItemCopyCode(e, 'name')}>
+            Copiar nome do ícone na &quot;react-icons&quot;
+          </Item>
+          <Item onClick={(e) => handleItemCopyCode(e, 'import')}>
+            Copiar importação &quot;react-icons&quot;
+          </Item>
+          <Item onClick={(e) => handleItemCopyCode(e, 'element')}>
+            Copiar elemento React
+          </Item>
+          <Separator />
+        </>
+      )}
       <Item disabled>{iconLibSelected.name}</Item>
-      <Separator />
-      <Item onClick={() => shell.openExternal(iconLibSelected.projectUrl)}>
-        Ir para o site
-      </Item>
+      {iconLibSelected?.projectUrl && (
+        <>
+          <Separator />
+          <Item onClick={() => shell.openExternal(iconLibSelected?.projectUrl)}>
+            Ir para o site
+          </Item>
+        </>
+      )}
     </Menu>
   )
 }
