@@ -36,7 +36,7 @@
 
 ## ⬇ Downloaded Images
 
-  Pode baixar o executável [aqui]([asd](https://github.com/solrachix/icons-manager/releases/tag/alpha))
+  Pode baixar o executável [aqui](https://github.com/solrachix/icons-manager/releases/tag/alpha)
 
 ## ⚔ Features
 
