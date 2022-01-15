@@ -58,14 +58,13 @@
 
 ### Clone
 
-- Clone this repo to your local machine using:
+- Clone este repositório na sua maquina local, usando:
 
 ```
-https://github.com/solrachix/icons-manager
+git clone https://github.com/solrachix/icons-manager.git
 ```
 
 ---
-
 
 ### Setup
 
@@ -106,29 +105,29 @@ https://github.com/solrachix/icons-manager
 
 ### Passo 1
 
-- 🍴 Fork this repo!
+- 🍴 Fork este repositório!
 
 ### Passo 2
 
-- 👯 Clone this repo to your local machine using `https://github.com/solrachix/icons-manager`
+- 👯 Clone este repositório na sua maquina local, usando: `git clone https://github.com/solrachix/icons-manager.git`
 
 ### Passo 3
 
-- 🎋 Create your feature branch using `git checkout -b my-feature`
+- 🎋 Crie sua branch de feature com: `git checkout -b my-feature`
 
 ### Passo 4
 
-- ✅ Commit your changes using `git commit -m 'feat: My new feature'`;
+- ✅ Faça commit das suas alterações assim: `git commit -m 'feat: My new feature'`;
 
 ### Passo 5
 
-- 📌 Push to the branch using `git push origin my-feature`;
+- 📌 Suba a sua nova branch assim: `git push origin my-feature`;
 
 ### Passo 6
 
-- 🔃 Create a new pull request
+- 🔃 Agora cria uma pull request
 
-After your Pull Request is merged, can you delete your feature branch.
+Depois que sua solicitação de pull for mesclada, você poderá excluir sua brach.
 
 ---
 
@@ -144,7 +143,7 @@ Entre em contato comigo em um dos seguintes lugares!
 ## 📝 License
 <img alt="License" src="https://img.shields.io/badge/license-MIT-5965e0?style=for-the-badge&labelColor=5965e0&color=5965e0">
 
-This project is under the [Artistic License 2.0](./LICENSE). file for details.
+Este projeto está sob a [Licença Artística 2.0](./LICENSE). arquivo para detalhes.
 
 ---
 
