@@ -1,0 +1,9 @@
+{
+  "project_name": "Icons Manager",
+  "type": "desktop",
+  
+  "template_url": "./.github_assets/showcase.png",
+  "logo_url": "./.github_assets/logo-v2.png",
+
+  "desktop": "./"
+}
