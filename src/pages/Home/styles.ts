@@ -56,12 +56,16 @@ export const Container = styled.div`
         list-style: none;
 
         li {
+          position: relative;
           width: 100%;
           height: 3rem;
           padding: 1rem;
 
           border-bottom: 1px solid
             ${(props) => props.theme.colors.background.darker};
+
+          display: flex;
+          align-items: center;
 
           cursor: pointer;
           transition: all 0.2s;
@@ -73,6 +77,25 @@ export const Container = styled.div`
 
           &:hover {
             border-color: ${(props) => props.theme.colors.primary.normal};
+          }
+
+          .ball {
+            display: none;
+            width: 8px;
+            height: 8px;
+            margin-right: 1rem;
+
+            border-radius: 50%;
+
+            background-color: ${(props) => props.theme.colors.green};
+          }
+
+          &.new {
+            padding-left: 1rem;
+
+            .ball {
+              display: block;
+            }
           }
         }
       }

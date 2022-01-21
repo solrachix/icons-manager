@@ -1,5 +1,6 @@
 interface IconLib {
   id: string
+  new?: boolean
   isExternal?: boolean
   license?: string
   licenseUrl?: string

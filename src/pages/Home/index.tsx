@@ -2,13 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import * as Icons from 'react-icons'
 import { IconType } from 'react-icons/lib'
-import IconlyGlass from '../../assets/IconlyGlass'
+import { IconlyGlass } from '../../assets'
 
+import cx from 'classnames'
 import { useTheme } from 'styled-components'
+
 import ContextMenu, { RefMenu } from '../../components/ContextMenu'
 import PickerColor from '../../components/PickerColor'
 
 import { Container } from './styles'
+import ReactTooltip from 'react-tooltip'
 
 function Home (): React.ReactElement {
   const theme = useTheme().colors
@@ -25,6 +28,10 @@ function Home (): React.ReactElement {
   const [icons, setIcons] = useState<string[]>([])
 
   useEffect(() => {
+    ReactTooltip.rebuild()
+  }, [iconsLib])
+
+  useEffect(() => {
     setIcons(
       Object.keys(iconsLib[selected].icons || {}).filter(
         (iconName) =>
@@ -36,7 +43,7 @@ function Home (): React.ReactElement {
   useEffect(() => {
     ;(async () => {
       let newIconsLib: IconLib[] = []
-      newIconsLib.push(await IconlyGlass())
+      newIconsLib.push(IconlyGlass)
 
       for await (const iconLib of iconsLib) {
         await import(`react-icons/${iconLib.id}/index.js`).then((icons) => {
@@ -46,8 +53,9 @@ function Home (): React.ReactElement {
           })
         })
       }
+
       newIconsLib = newIconsLib.sort((a: IconLib, b: IconLib) =>
-        a.name.localeCompare(b.name)
+        Number(a?.new) === 0 ? a.name.localeCompare(b.name) : 1
       )
 
       setIcons(Object.keys(newIconsLib[selected].icons || {}))
@@ -103,8 +111,14 @@ function Home (): React.ReactElement {
               <li
                 key={Icon.name}
                 onClick={() => handleSelectedIconFamily(index)}
+                className={cx({ new: Icon?.new })}
                 data-selected={index === selected && 'selected'}
+                data-tip={
+                  Icon?.new &&
+                  `A Biblioteca ${Icon.name}, foi adicionado recentemente. De uma chance para ela 🙃`
+                }
               >
+                <div className="ball" />
                 {Icon.name}
               </li>
             ))}
