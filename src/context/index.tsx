@@ -1,6 +1,8 @@
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
 
+import ReactTooltip from 'react-tooltip'
+
 import { WindowProvider } from './window'
 import { UpdaterProvider } from './updater'
 
@@ -12,7 +14,10 @@ function AppProvider ({ children }: Props): React.ReactElement {
   return (
     <HashRouter>
       <WindowProvider>
-        <UpdaterProvider>{children}</UpdaterProvider>
+        <UpdaterProvider>
+          <ReactTooltip />
+          {children}
+        </UpdaterProvider>
       </WindowProvider>
     </HashRouter>
   )
