@@ -40,11 +40,8 @@
         ]
     },
     "dependencies": {
-        "@material-ui/core": "^4.12.3",
         "@types/react-select": "^3.0.22",
         "@types/uuid": "^8.3.0",
-        "@unform/core": "^2.1.3",
-        "@unform/web": "^2.1.3",
         "based-blob": "^1.0.1",
         "classnames": "^2.3.1",
         "copy-webpack-plugin": "^6.1.1",
@@ -63,7 +60,6 @@
         "react-color": "^2.19.3",
         "react-contexify": "^5.0.0",
         "react-dom": "^16.13.1",
-        "react-dropzone": "^11.2.1",
         "react-icons": "^3.10.0",
         "react-modal": "^3.11.2",
         "react-router-dom": "^5.2.0",
@@ -152,25 +148,29 @@
         },
         "win": {
             "asar": false,
-            "target": [{
-                "target": "nsis",
-                "arch": [
-                    "x64",
-                    "ia32"
-                ]
-            }],
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64",
+                        "ia32"
+                    ]
+                }
+            ],
             "icon": "dist/renderer/icon.ico",
             "publish": [
                 "github"
             ]
         },
-        "publish": [{
-            "provider": "github",
-            "owner": "solrachix",
-            "repo": "icons-manager",
-            "releaseType": "draft",
-            "private": false
-        }],
+        "publish": [
+            {
+                "provider": "github",
+                "owner": "solrachix",
+                "repo": "icons-manager",
+                "releaseType": "draft",
+                "private": false
+            }
+        ],
         "nsis": {
             "installerIcon": "dist/renderer/icon.ico",
             "installerHeaderIcon": "dist/renderer/icon.ico",
