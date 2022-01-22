@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   width: 12%;
+  margin-left: 1rem;
 
   button {
     width: 100%;
     padding: 0.2rem 0.8rem;
-    margin-left: 1rem;
 
     border: 1px solid ${(props) => props.theme.colors.background.darker};
     background: transparent;

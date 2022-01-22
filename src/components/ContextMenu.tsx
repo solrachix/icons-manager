@@ -106,7 +106,11 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
       {iconLibSelected?.projectUrl && (
         <>
           <Separator />
-          <Item onClick={() => shell.openExternal(iconLibSelected?.projectUrl)}>
+          <Item
+            onClick={() =>
+              shell.openExternal(String(iconLibSelected?.projectUrl))
+            }
+          >
             Ir para o site
           </Item>
         </>

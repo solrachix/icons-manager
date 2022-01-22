@@ -54,8 +54,9 @@ function Home (): React.ReactElement {
         })
       }
 
-      newIconsLib = newIconsLib.sort((a: IconLib, b: IconLib) =>
-        Number(a?.new) === 0 ? a.name.localeCompare(b.name) : 1
+      newIconsLib = newIconsLib.sort(
+        (a: IconLib, b: IconLib) =>
+          /* Number(a?.new) === 0 ? */ a.name.localeCompare(b.name) /* : 1 */
       )
 
       setIcons(Object.keys(newIconsLib[selected].icons || {}))

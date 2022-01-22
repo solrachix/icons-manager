@@ -25,20 +25,22 @@ export const Container = styled(animated.div)<ContainerProps>`
     }
 
     return css`
-      width: 320px;
-
       position: relative;
-      padding: 16px 30px 16px 16px;
-      margin: 0 24px 8px 0;
+
+      width: 320px;
+      padding: 1rem 1.8rem 1rem 1rem;
+      margin: 0 1.5rem 0.5rem 0;
+
       border-radius: 4px;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 2px 0.5rem rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(0.4rem);
 
       display: flex;
 
       ${toastTypes[props.type]}
 
       &:first-child {
-        margin-top: 24px;
+        margin-top: 2.5rem;
       }
 
       svg {
@@ -63,8 +65,8 @@ export const Container = styled(animated.div)<ContainerProps>`
 
       button {
         position: absolute;
-        right: 8px;
-        top: 18px;
+        right: 0.5rem;
+        top: 1.2rem;
         opacity: 0.6;
         border: 0;
         background: transparent;

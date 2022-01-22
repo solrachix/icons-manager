@@ -1,24 +1,19 @@
-import React, { useEffect, useCallback } from 'react'
-import {
-  FiAlertCircle,
-  FiCheckCircle,
-  FiInfo,
-  FiXCircle
-} from 'react-icons/fi'
+import React, { useEffect, useCallback, useState } from 'react'
+import { FiAlertCircle, FiCheckCircle, FiInfo, FiXCircle } from 'react-icons/fi'
 import { useWindow } from '../../context/window'
 
 import { Container } from './styles'
 
 export interface ToastMessage {
-  id: string;
-  type: 'success' | 'error' | 'info';
-  title: string;
-  description?: string;
+  id: string
+  type: 'success' | 'error' | 'info'
+  title: string
+  description?: string
 }
 
 interface ToastProps {
-  toast: ToastMessage;
-  style: any;
+  toast: ToastMessage
+  style: any
 }
 
 const icons = {
@@ -29,27 +24,30 @@ const icons = {
 
 const Toast: React.FC<ToastProps> = ({ toast, style }) => {
   const { removeToast } = useWindow().Toast
+  const [time, setTime] = useState(4000)
 
-  const closeToast = useCallback(() => removeToast(toast.id), [
-    removeToast,
-    toast.id
-  ])
+  const closeToast = useCallback(
+    () => removeToast(toast.id),
+    [removeToast, toast.id]
+  )
 
   useEffect(() => {
     const timer = setTimeout(() => {
       closeToast()
-    }, 4000)
+    }, time)
 
     return (): void => {
       clearTimeout(timer)
     }
-  }, [closeToast])
+  }, [closeToast, time])
 
   return (
     <Container
       type={toast.type}
       hasDescription={!!toast.description}
       style={style}
+      onMouseMove={() => setTime(100000)}
+      onMouseLeave={() => setTime(2000)}
     >
       {icons[toast.type]}
 

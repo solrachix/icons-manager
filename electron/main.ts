@@ -5,6 +5,7 @@ import {
   nativeImage,
   shell
 } from 'electron'
+import { autoUpdater } from 'electron-updater'
 import contextMenu from 'electron-context-menu'
 import installExtension, {
   REACT_DEVELOPER_TOOLS
@@ -15,8 +16,6 @@ import * as url from 'url'
 
 import Window from '../src/utils/window'
 import { getSystemColorPalette } from './getSystemColorPalette'
-
-import { autoUpdater } from 'electron-updater'
 
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Procurando pr atualizações...')
@@ -47,7 +46,7 @@ let mainWindow: Electron.BrowserWindow // | null
 let webContents: Electron.WebContents
 
 function sendStatusToWindow (text) {
-  // webContents.send('message', text)
+  webContents.send('message', text)
 }
 
 getSystemColorPalette()
