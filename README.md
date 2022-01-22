@@ -34,9 +34,9 @@
     <img alt="Ask Me Bro Logo" src="https://github.com/solrachix/icons-manager/blob/master/.github_assets/showcase.png?raw=true" />
 </p>
 
-## ⬇ Downloaded Images
+## ⬇ Downloaded
 
-  Pode baixar o executável [aqui](https://github.com/solrachix/icons-manager/releases/tag/alpha)
+  Pode baixar o executável [aqui](https://github.com/solrachix/icons-manager/releases/tag/pre-beta)
 
 ## ⚔ Features
 
@@ -48,6 +48,29 @@
 - [x] Copiar nome no React-icons 
 - [x] Navegar para a pagina web da biblioteca
 
+## 📚 Biblioteca de icones
+  Aqui vai o nome com todas as bibliotecas incluídas no projeto até o momento:
+- [x] [Ant Design Icons](https://github.com/ant-design/ant-design-icons)
+- [x] [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [x] [BoxIcons](https://boxicons.com/)
+- [x] [css.gg](https://css.gg/)
+- [x] [Devicons](https://vorillaz.github.io/devicons/#/main)
+- [x] [Feather](https://feathericons.com/)
+- [x] [Flat Color Icons](https://icons8.com/icons/color)
+- [x] [Font Awesome](https://fontawesome.com/)
+- [x] [Game Icons](https://game-icons.net/)
+- [x] [Github Octicons icons](https://primer.style/octicons/)
+- [x] [Grommet-Icons](https://github.com/grommet/grommet-icons)
+- [x] [Heroicons](https://github.com/tailwindlabs/heroicons)
+- [x] [Iconly Glass](https://piqodesign.gumroad.com/l/iconlyglass)
+- [x] [IcoMoon Free](https://github.com/Keyamoon/IcoMoon-Free)
+- [x] [Ionicons](https://ionic.io/ionicons)
+- [x] [Material Design icons](http://google.github.io/material-design-icons/)
+- [x] [Remix Icon](https://github.com/Remix-Design/RemixIcon)
+- [x] [Simple Icons](https://simpleicons.org/)
+- [x] [Typicons](https://www.s-ings.com/typicons/)
+- [x] [VS Code Icons](https://github.com/microsoft/vscode-codicons)
+- [x] [Weather Icons](https://erikflowers.github.io/weather-icons/)
 ---
 
 ## 🚀 Executar localmente
