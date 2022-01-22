@@ -188,9 +188,11 @@ app.on('ready', () => {
   setTimeout(() => {
     createWindow()
     createShortcuts()
-  }, 2000)
+  }, 1000)
 })
 
 app.on('activate', recreateWindow)
 app.allowRendererProcessReuse = true
 app.commandLine.appendSwitch('--enable-experimental-web-platform-features')
+app.commandLine.appendSwitch('enable-transparent-visuals')
+app.commandLine.appendSwitch('disable-gpu')

@@ -1,4 +1,4 @@
-export { default as Activity } from './activity.svg'
+export { default as Activity } from './Activity.svg'
 export { default as Add } from './Add.svg'
 export { default as Arrow2 } from './Arrow-1.svg'
 export { default as Arrow } from './Arrow.svg'
