@@ -1,14 +1,4 @@
-import { Theme, createStyles, makeStyles } from '@material-ui/core'
 import styled from 'styled-components'
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      textAlign: 'center',
-      paddingTop: theme.spacing(4)
-    }
-  })
-)
 
 export const Container = styled.div`
   header {
@@ -124,5 +114,3 @@ export const Container = styled.div`
     }
   }
 `
-
-export default useStyles

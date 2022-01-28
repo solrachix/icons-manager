@@ -351,18 +351,24 @@ electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('web-contents-created', function
     window: contents
   });
 });
+var timeout = 0;
+
+if (process.platform === 'linux') {
+  timeout = 1000;
+  electron__WEBPACK_IMPORTED_MODULE_0__["app"].commandLine.appendSwitch('enable-transparent-visuals');
+  electron__WEBPACK_IMPORTED_MODULE_0__["app"].commandLine.appendSwitch('disable-gpu');
+}
+
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('ready', function () {
   electron_updater__WEBPACK_IMPORTED_MODULE_1__["autoUpdater"].checkForUpdatesAndNotify();
   setTimeout(function () {
     createWindow();
     createShortcuts();
-  }, 200);
+  }, timeout);
 });
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('activate', recreateWindow);
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].allowRendererProcessReuse = true;
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].commandLine.appendSwitch('--enable-experimental-web-platform-features');
-electron__WEBPACK_IMPORTED_MODULE_0__["app"].commandLine.appendSwitch('enable-transparent-visuals');
-electron__WEBPACK_IMPORTED_MODULE_0__["app"].commandLine.appendSwitch('disable-gpu');
 
 /***/ }),
 
