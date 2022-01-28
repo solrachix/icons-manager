@@ -66,6 +66,10 @@ export const GlobalStyle = createGlobalStyle`
   .react-contexify__theme--dark {
     background: ${(props) => props.theme.colors.background.normal} !important;
 
+    .react-contexify__submenu {
+      background: ${(props) => props.theme.colors.background.normal} !important;
+    }
+
     .react-contexify__separator{
       background: ${(props) => props.theme.colors.background.darker} !important;
     }

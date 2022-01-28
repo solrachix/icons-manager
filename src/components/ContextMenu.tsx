@@ -3,12 +3,18 @@ import React, { forwardRef, useImperativeHandle } from 'react'
 
 import {
   Menu,
+  Submenu,
   Item,
   Separator,
   useContextMenu,
   ItemParams
 } from 'react-contexify'
 import 'react-contexify/dist/ReactContexify.css'
+
+import { transform } from '@svgr/core'
+
+import HtmlToJsx from 'htmltojsx'
+
 import { useWindow } from '../context/window'
 
 interface Props {
@@ -63,7 +69,7 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
     })
   }
 
-  function handleItemCopyCode (
+  async function handleItemCopyCode (
     { props }: ItemParams<{ svg: SVGElement; iconType: string }>,
     type: string
   ) {
@@ -71,10 +77,22 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
 
     if (type === 'name') {
       text = props?.iconType || ''
-    } else if (type === 'element') {
+    } else if (type === 'component-RA') {
       text = `<${props?.iconType} />`
     } else if (type === 'import') {
       text = `import { ${props?.iconType} } from 'react-icons/${iconLibSelected.id}'`
+    } else if (type === 'component') {
+      text = await transform(
+        String(props?.svg.outerHTML),
+        { icon: true },
+        { componentName: props?.iconType }
+      )
+    } else if (type === 'jsx') {
+      const converter = new HtmlToJsx({
+        createClass: false
+      })
+
+      text = converter.convert(String(props?.svg.outerHTML))
     }
 
     navigator.clipboard.writeText(text)
@@ -90,22 +108,23 @@ function ContextMenu ({ iconLibSelected }: Props, ref: any) {
       <Item onClick={handleItemClick}>Copiar SVG</Item>
 
       {!iconLibSelected?.isExternal && (
-        <Item onClick={(e) => handleItemCopyCode(e, 'name')}>
-          Copiar nome do ícone na &quot;react-icons&quot;
-        </Item>
+        <Submenu label="React-icons">
+          <Item onClick={(e) => handleItemCopyCode(e, 'name')}>
+            Copiar nome do ícone
+          </Item>
+          <Item onClick={(e) => handleItemCopyCode(e, 'import')}>
+            Copiar importação
+          </Item>
+          <Item onClick={(e) => handleItemCopyCode(e, 'component-RA')}>
+            Copiar elemento React
+          </Item>
+        </Submenu>
       )}
 
-      {!iconLibSelected?.isExternal && (
-        <Item onClick={(e) => handleItemCopyCode(e, 'import')}>
-          Copiar importação &quot;react-icons&quot;
-        </Item>
-      )}
-
-      {!iconLibSelected?.isExternal && (
-        <Item onClick={(e) => handleItemCopyCode(e, 'element')}>
-          Copiar elemento React
-        </Item>
-      )}
+      <Item onClick={(e) => handleItemCopyCode(e, 'jsx')}>Copiar JSX</Item>
+      <Item onClick={(e) => handleItemCopyCode(e, 'component')}>
+        Copiar componente React
+      </Item>
 
       {!iconLibSelected?.isExternal && <Separator />}
 

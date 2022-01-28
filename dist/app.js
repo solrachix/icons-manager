@@ -53143,7 +53143,7 @@ module.exports = function (x) {
 
 "use strict";
 
-const stripAnsi = __webpack_require__(/*! strip-ansi */ "./node_modules/strip-ansi/index.js");
+const stripAnsi = __webpack_require__(/*! strip-ansi */ "./node_modules/string-width/node_modules/strip-ansi/index.js");
 const isFullwidthCodePoint = __webpack_require__(/*! is-fullwidth-code-point */ "./node_modules/is-fullwidth-code-point/index.js");
 const emojiRegex = __webpack_require__(/*! emoji-regex */ "./node_modules/emoji-regex/index.js");
 
@@ -53193,10 +53193,10 @@ module.exports.default = stringWidth;
 
 /***/ }),
 
-/***/ "./node_modules/strip-ansi/index.js":
-/*!******************************************!*\
-  !*** ./node_modules/strip-ansi/index.js ***!
-  \******************************************/
+/***/ "./node_modules/string-width/node_modules/strip-ansi/index.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/string-width/node_modules/strip-ansi/index.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
