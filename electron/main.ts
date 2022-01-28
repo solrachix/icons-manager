@@ -182,17 +182,23 @@ app.on('web-contents-created', (e, contents) => {
   })
 })
 
+let timeout = 0
+if (process.platform === 'linux') {
+  timeout = 1000
+
+  app.commandLine.appendSwitch('enable-transparent-visuals')
+  app.commandLine.appendSwitch('disable-gpu')
+}
+
 app.on('ready', () => {
   autoUpdater.checkForUpdatesAndNotify()
 
   setTimeout(() => {
     createWindow()
     createShortcuts()
-  }, 1000)
+  }, timeout)
 })
 
 app.on('activate', recreateWindow)
 app.allowRendererProcessReuse = true
 app.commandLine.appendSwitch('--enable-experimental-web-platform-features')
-app.commandLine.appendSwitch('enable-transparent-visuals')
-app.commandLine.appendSwitch('disable-gpu')
