@@ -35,11 +35,11 @@ function PickerColor ({
       </button>
 
       {open && (
-        <SketchPicker
-          className="picker-color"
-          color={color}
-          onChangeComplete={onChange}
-        />
+        <div className="overlay" onClick={() => setOpen(!open)}>
+          <div className="picker-color" onClick={(e) => e.stopPropagation()}>
+            <SketchPicker color={color} onChangeComplete={onChange} />
+          </div>
+        </div>
       )}
     </Container>
   )

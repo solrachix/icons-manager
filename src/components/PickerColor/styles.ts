@@ -22,20 +22,34 @@ export const Container = styled.div`
     cursor: pointer;
   }
 
+  .overlay {
+    width: 100%;
+    height: 95vh;
+    left: 0;
+    top: 0;
+
+    /* background-color: red; */
+    position: absolute;
+
+    z-index: 10;
+  }
+
   .picker-color {
     position: absolute;
     top: 4rem;
     right: 1rem;
 
-    background: ${(props) => props.theme.colors.background.normal} !important;
+    > div {
+      background: ${(props) => props.theme.colors.background.normal} !important;
 
-    .flexbox-fix {
-      border-color: ${(props) =>
-        props.theme.colors.background.darker} !important;
-    }
+      .flexbox-fix {
+        border-color: ${(props) =>
+          props.theme.colors.background.darker} !important;
+      }
 
-    input {
-      box-shadow: none !important;
+      input {
+        box-shadow: none !important;
+      }
     }
   }
 `
