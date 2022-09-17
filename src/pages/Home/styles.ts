@@ -111,6 +111,24 @@ export const Container = styled.div`
         height: 4rem;
         margin: 1rem 2rem;
       }
+
+      .not-found-icons {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        text-align: center;
+
+        span {
+          font-size: 1.8rem;
+        }
+
+        b {
+          font-size: 4rem;
+        }
+      }
     }
   }
 `

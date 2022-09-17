@@ -133,6 +133,13 @@ function Home (): React.ReactElement {
               className: 'react-icons'
             }}
           >
+            {icons.length <= 0 && (
+              <div className="not-found-icons">
+                <span>Ícone não encontrado!</span>
+                <b>☹️</b>
+              </div>
+            )}
+
             {icons?.map((IconName, index) => {
               let Icon
 
