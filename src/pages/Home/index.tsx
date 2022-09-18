@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import * as Icons from 'react-icons'
 import { IconType } from 'react-icons/lib'
-import { IconlyGlass } from '../../assets'
+import * as ExternalIconsLibs from '../../assets'
 
 import cx from 'classnames'
 import { useTheme } from 'styled-components'
@@ -43,7 +43,15 @@ function Home (): React.ReactElement {
   useEffect(() => {
     ;(async () => {
       let newIconsLib: IconLib[] = []
-      newIconsLib.push(IconlyGlass)
+
+      const externalIconsLibsValues = Object.values(ExternalIconsLibs)
+
+      for (let i = 0; i < externalIconsLibsValues.length; i++) {
+        const IconLibValue = externalIconsLibsValues[i]
+
+        console.log(IconLibValue)
+        newIconsLib.push(IconLibValue)
+      }
 
       for await (const iconLib of iconsLib) {
         await import(`react-icons/${iconLib.id}/index.js`).then((icons) => {
@@ -93,7 +101,7 @@ function Home (): React.ReactElement {
   }
 
   return (
-    <Container>
+    <Container iconsColor={color}>
       <header>
         <input
           type="search"
@@ -154,6 +162,7 @@ function Home (): React.ReactElement {
                 <Icon
                   key={`${IconName}-${index}`}
                   onContextMenu={(e: any) => handleContextMenu(e, IconName)}
+                  className={`${iconsLib[selected].isExternal && 'external'}`}
                   onClick={handleCopyOnClick}
                 />
               )

@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+interface ContainerProps {
+  iconsColor: string
+}
+export const Container = styled.div<ContainerProps>`
   header {
     position: relative;
     width: 100%;
@@ -110,6 +113,10 @@ export const Container = styled.div`
         width: 4rem;
         height: 4rem;
         margin: 1rem 2rem;
+
+        &.external path {
+          stroke: ${(props) => props.iconsColor};
+        }
       }
 
       .not-found-icons {
