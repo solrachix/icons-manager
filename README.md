@@ -63,6 +63,7 @@
 - [x] [Grommet-Icons](https://github.com/grommet/grommet-icons)
 - [x] [Heroicons](https://github.com/tailwindlabs/heroicons)
 - [x] [Iconly Glass](https://piqodesign.gumroad.com/l/iconlyglass)
+- [x] [Iconsax | Vuesax](https://iconsax.io/)
 - [x] [IcoMoon Free](https://github.com/Keyamoon/IcoMoon-Free)
 - [x] [Ionicons](https://ionic.io/ionicons)
 - [x] [Material Design icons](http://google.github.io/material-design-icons/)
