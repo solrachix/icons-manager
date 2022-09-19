@@ -109,13 +109,43 @@ export const Container = styled.div<ContainerProps>`
 
       overflow: auto;
 
+      .variants {
+        width: 100%;
+
+        display: flex;
+        gap: 2rem;
+
+        button {
+          padding: 0.1rem 1rem;
+          margin: 0 1rem;
+
+          color: ${(props) => props.theme.colors.primary.normal};
+          border: 1px solid ${(props) => props.theme.colors.primary.normal};
+          background: transparent;
+          border-radius: 1rem;
+
+          cursor: pointer;
+
+          &.selected {
+            background: ${(props) => props.theme.colors.primary.normal};
+            color: ${(props) => props.theme.colors.text.light};
+          }
+        }
+      }
+
       svg {
         width: 4rem;
         height: 4rem;
         margin: 1rem 2rem;
 
-        &.external path {
-          stroke: ${(props) => props.iconsColor};
+        &.external {
+          &.fill-icon-color path {
+            fill: ${(props) => props.iconsColor};
+          }
+
+          &.stroke-icon-color path {
+            stroke: ${(props) => props.iconsColor};
+          }
         }
       }
 

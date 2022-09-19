@@ -1,7 +1,7 @@
 import * as iconlyGlass from './IconlyGlass'
 import * as iconsax from './Vuesax'
 
-export const IconlyGlass = {
+export const IconlyGlass: IconLib = {
   id: 'external-1',
   new: true,
   isExternal: true,
@@ -10,11 +10,23 @@ export const IconlyGlass = {
   projectUrl: 'https://piqodesign.gumroad.com/l/iconlyglass'
 }
 
-export const Iconsax = {
+export const Iconsax: IconLib = {
   id: 'external-1',
   new: true,
   isExternal: true,
   name: 'Iconsax',
-  icons: iconsax,
-  projectUrl: 'https://iconsax.io/'
+  icons: {},
+  projectUrl: 'https://iconsax.io/',
+  variants: [
+    {
+      name: 'Linear',
+      icons: iconsax.LinearIcons,
+      className: 'stroke-icon-color'
+    },
+    {
+      name: 'Bold',
+      icons: iconsax.BoldIcons,
+      className: 'fill-icon-color'
+    }
+  ]
 }

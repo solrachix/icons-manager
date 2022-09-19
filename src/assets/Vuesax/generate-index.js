@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const folderName = 'linear'
+const folderName = 'bold'
 const files = fs.readdirSync(`./${folderName}`)
 
 function capitalize (string) {

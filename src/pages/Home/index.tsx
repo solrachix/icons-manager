@@ -26,6 +26,9 @@ function Home (): React.ReactElement {
   const [selected, setSelected] = useState(0)
   const [color, setColor] = useState(theme.text.normal)
   const [icons, setIcons] = useState<string[]>([])
+  const [iconVariantLib, setIconVariantLib] = useState<IconLibVariant | null>(
+    null
+  )
 
   useEffect(() => {
     ReactTooltip.rebuild()
@@ -41,6 +44,28 @@ function Home (): React.ReactElement {
   }, [search, selected])
 
   useEffect(() => {
+    const IconVariants = iconsLib[selected].variants || []
+
+    if (IconVariants.length > 0) {
+      setIcons(Object.keys(IconVariants[0].icons || {}))
+      setIconVariantLib(IconVariants[0])
+      setIconsLib(
+        iconsLib.map((v, index) => {
+          if (index === selected) {
+            v.icons = IconVariants[0].icons
+
+            return v
+          } else {
+            return v
+          }
+        })
+      )
+    } else {
+      setIcons(Object.keys(iconsLib[selected].icons || {}))
+    }
+  }, [selected])
+
+  useEffect(() => {
     ;(async () => {
       let newIconsLib: IconLib[] = []
 
@@ -48,8 +73,11 @@ function Home (): React.ReactElement {
 
       for (let i = 0; i < externalIconsLibsValues.length; i++) {
         const IconLibValue = externalIconsLibsValues[i]
+        const IconVariants = IconLibValue?.variants || []
+        if (IconVariants.length > 0) {
+          IconLibValue.icons = IconVariants[0]
+        }
 
-        console.log(IconLibValue)
         newIconsLib.push(IconLibValue)
       }
 
@@ -100,6 +128,22 @@ function Home (): React.ReactElement {
     setColor(color.hex)
   }
 
+  function handleSelectedVariant (variant: IconLibVariant) {
+    setIcons(Object.keys(variant.icons || {}))
+    setIconVariantLib(variant)
+    setIconsLib(
+      iconsLib.map((v, index) => {
+        if (index === selected) {
+          v.icons = variant.icons
+
+          return v
+        } else {
+          return v
+        }
+      })
+    )
+  }
+
   return (
     <Container iconsColor={color}>
       <header>
@@ -134,6 +178,18 @@ function Home (): React.ReactElement {
           </ul>
         </aside>
         <div className="content">
+          <div className="variants">
+            {iconsLib[selected]?.variants?.map((variant) => (
+              <button
+                className={cx(iconVariantLib?.name === variant.name && 'selected')}
+                onClick={() => handleSelectedVariant(variant)}
+                key={`${iconsLib[selected].name}-${variant.name}`}
+              >
+                {variant.name}
+              </button>
+            ))}
+          </div>
+
           <Icons.IconContext.Provider
             value={{
               size: '4rem',
@@ -150,9 +206,14 @@ function Home (): React.ReactElement {
 
             {icons?.map((IconName, index) => {
               let Icon
+              let Variants
+
+              if (iconsLib[selected].variants) {
+                Variants = iconVariantLib
+              }
 
               if (iconsLib[selected].isExternal) {
-                Icon = iconsLib[selected]?.icons[IconName]
+                Icon = iconsLib[selected]?.icons![IconName]
               } else {
                 Icon = iconsLib[selected]?.icons?.default[IconName]
               }
@@ -162,7 +223,10 @@ function Home (): React.ReactElement {
                 <Icon
                   key={`${IconName}-${index}`}
                   onContextMenu={(e: any) => handleContextMenu(e, IconName)}
-                  className={`${iconsLib[selected].isExternal && 'external'}`}
+                  className={cx(
+                    Variants?.className,
+                    `${iconsLib[selected].isExternal && 'external'}`
+                  )}
                   onClick={handleCopyOnClick}
                 />
               )

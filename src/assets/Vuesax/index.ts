@@ -1,3 +1,5 @@
-export * from './linear'
+import * as LinearIcons from './linear'
 
-// export {...LinearIcons}
+import * as BoldIcons from './bold'
+
+export { LinearIcons, BoldIcons }
